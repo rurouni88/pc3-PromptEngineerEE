@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+:root, [data-theme="dark"] {
+  --bg-primary: #0B0F19;
+  --bg-secondary: #1E293B;
+  --bg-tertiary: #020617;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-theme: #334155;
+  --terminal-green: #10B981;
+  --terminal-error: #EF4444;
+  --terminal-amber: #F59E0B;
+  --teams-green: #6264A7;
+}
+
+@utility bg-primary { background-color: var(--bg-primary); }
+@utility bg-secondary { background-color: var(--bg-secondary); }
+@utility bg-tertiary { background-color: var(--bg-tertiary); }
+@utility text-primary { color: var(--text-primary); }
+@utility text-secondary { color: var(--text-secondary); }
+@utility text-muted { color: var(--text-muted); }
+@utility border-theme { border-color: var(--border-theme); }
+@utility bg-teams { background-color: var(--teams-green); }
+@utility text-terminal-green { color: var(--terminal-green); }
+@utility text-terminal-error { color: var(--terminal-error); }
+@utility text-terminal-amber { color: var(--terminal-amber); }
+
+/* Flash animation for high stress */
+@keyframes neon-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.animate-neon-flash {
+  animation: neon-flash 0.5s ease-in-out infinite;
+}
+
+/* Pulse for notification dot */
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+/* Slide in animation */
+@keyframes slide-in {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Cursor blink */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Push button glow */
+@keyframes push-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.6); }
+}
+
+.animate-push-glow {
+  animation: push-glow 2s ease-in-out infinite;
+}
+
+/* Glitch eruption — a live glitch shaking in the deploy stream */
+@keyframes glitch-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-1px); }
+  80% { transform: translateX(1px); }
+}
+
+.animate-glitch-shake {
+  animation: glitch-shake 0.25s linear infinite;
+}
+
+/* PANIC button pulse */
+@keyframes panic-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 22px rgba(239, 68, 68, 0.8); }
+}
+
+.animate-panic-pulse {
+  animation: panic-pulse 0.8s ease-in-out infinite;
+}
+
+/* New deploy line streaming in */
+@keyframes line-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-line-in {
+  animation: line-in 0.2s ease-out;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overscroll-behavior: none;
+}
+
+/* Custom scrollbar for terminal */
+.terminal-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.terminal-scroll::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+.terminal-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-theme);
+  border-radius: 2px;
+}
