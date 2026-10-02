@@ -1,4 +1,7 @@
 // src/components/PauseOverlay.tsx
+import { useState } from 'react';
+import { HelpModal } from './HelpModal';
+
 interface PauseOverlayProps {
   onResume: () => void;
   onEndRun: () => void;
@@ -6,6 +9,8 @@ interface PauseOverlayProps {
 }
 
 export function PauseOverlay({ onResume, onEndRun, onRestart }: PauseOverlayProps) {
+  const [helpOpen, setHelpOpen] = useState(false);
+
   return (
     <div className="absolute inset-0 z-[100] flex items-center justify-center bg-black/80">
       <div className="bg-secondary border border-theme rounded-2xl p-8 max-w-sm w-full mx-4 text-center">
@@ -34,6 +39,12 @@ export function PauseOverlay({ onResume, onEndRun, onRestart }: PauseOverlayProp
           >
             RESTART DAY
           </button>
+          <button
+            onClick={() => setHelpOpen(true)}
+            className="w-full h-12 bg-secondary active:bg-tertiary rounded-xl font-bold text-secondary text-sm transition-colors"
+          >
+            ❓ HOW TO PLAY
+          </button>
         </div>
 
         <div className="mt-6 pt-4 border-t border-theme">
@@ -42,6 +53,8 @@ export function PauseOverlay({ onResume, onEndRun, onRestart }: PauseOverlayProp
           </p>
         </div>
       </div>
+
+      {helpOpen && <HelpModal onClose={() => setHelpOpen(false)} />}
     </div>
   );
 }

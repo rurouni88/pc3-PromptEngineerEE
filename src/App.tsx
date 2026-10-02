@@ -77,6 +77,13 @@ export default function App() {
 
   const [isTeamsOpen, setIsTeamsOpen] = useState(false);
 
+  // Settings can wipe persisted meta; reload the in-memory copy.
+  const handleMetaReset = useCallback(() => {
+    setMeta(loadMetaStore());
+    setUnlockedAch(loadAchievements());
+    setNewAch([]);
+  }, []);
+
   const lttcMs = state.runClockMs - state.ticketStartClock;
   const quality =
     state.phase === 'ticket' && state.ticket ? promptQuality(state, content) : null;
@@ -217,6 +224,7 @@ export default function App() {
           unlockedAchievements={unlockedAch}
           newAchievements={newAch}
           onStart={startRun}
+          onMetaReset={handleMetaReset}
         />
       )}
 
