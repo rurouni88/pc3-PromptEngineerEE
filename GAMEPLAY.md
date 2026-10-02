@@ -65,6 +65,13 @@ glitchChance = clamp(0.5 − 0.4 × quality + 0.25 × hype, 0.08, 0.70)
 Some tokens are locked behind career tiers (e.g. *Act as a DevOps Warlock* is Mid+).
 Locked tokens show a 🔒 in the drawer.
 
+### Picking Tokens (Carousel)
+
+The token drawer is a swipeable carousel: one page per category
+(**Role → Action → Modifier**). Swipe horizontally to change category, scroll
+vertically inside a page to browse tokens (Role has 20). The category dots
+on top are tappable and show how many tokens each page holds.
+
 ## 📋 Tickets
 
 ```
@@ -166,7 +173,23 @@ itself. Clean deploys and meltdowns both get reactions.
 ## ⏸ Pause
 
 Freezes everything. You can **END DAY** (cash out — the run is recorded, stats kept) or
-restart.
+restart. A **❓ HOW TO PLAY** button is also available here for mid-run refreshers.
+
+## ❓ How To Play
+
+A satirical explainer covering the loop, tokens & tags, the deploy phase, coffee,
+and DORA. Reach it from the **❓** button on the start screen (top-right) or from
+the pause overlay.
+
+## ⚙️ Settings
+
+Reach it from the **⚙️** button on the start screen (top-right):
+
+- **Font size** — 100–120% (rem-based, scales the whole UI; persisted in `pm_font_scale`)
+- **Reset achievements** — with confirmation
+- **Reset career** — wipes the ladder, cash, and DORA history; with confirmation
+
+No sound/haptics/theme toggles yet — those engines are deferred by design.
 
 ---
 

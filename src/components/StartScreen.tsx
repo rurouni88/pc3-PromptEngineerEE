@@ -9,6 +9,8 @@ import { CAREER_LADDER, nextTierHint } from '../engine/meta';
 import { ACHIEVEMENTS } from '../engine/achievements';
 import { doraForLifetime, formatMs, BAND_LABEL, type DoraBand } from '../engine/dora';
 import { tierRank } from '../engine/game';
+import { HelpModal } from './HelpModal';
+import { SettingsModal } from './SettingsModal';
 
 interface StartScreenProps {
   meta: MetaStore;
@@ -16,6 +18,8 @@ interface StartScreenProps {
   /** Achievement ids unlocked on the run that just ended. */
   newAchievements: string[];
   onStart: (tier: Tier) => void;
+  /** Reload in-memory meta after a settings reset. */
+  onMetaReset: () => void;
 }
 
 type Tab = 'play' | 'dora' | 'career' | 'achievements';
@@ -42,8 +46,11 @@ export function StartScreen({
   unlockedAchievements,
   newAchievements,
   onStart,
+  onMetaReset,
 }: StartScreenProps) {
   const [tab, setTab] = useState<Tab>('play');
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const { lifetime, tier, topRuns } = meta;
   const dora = doraForLifetime(lifetime);
   const hint = nextTierHint(lifetime, tier);
@@ -52,7 +59,23 @@ export function StartScreen({
   return (
     <div className="absolute inset-0 z-20 flex flex-col bg-primary">
       {/* Header */}
-      <div className="shrink-0 px-4 pt-6 pb-3 text-center">
+      <div className="shrink-0 relative px-4 pt-4 pb-3 text-center">
+        <div className="absolute top-1 right-1 flex gap-1">
+          <button
+            onClick={() => setHelpOpen(true)}
+            aria-label="How to play"
+            className="w-11 h-11 rounded-lg bg-secondary/60 border border-theme text-lg active:bg-tertiary transition-colors"
+          >
+            ❓
+          </button>
+          <button
+            onClick={() => setSettingsOpen(true)}
+            aria-label="Settings"
+            className="w-11 h-11 rounded-lg bg-secondary/60 border border-theme text-lg active:bg-tertiary transition-colors"
+          >
+            ⚙️
+          </button>
+        </div>
         <div className="text-5xl mb-2" aria-hidden>
           🐒
         </div>
@@ -282,6 +305,11 @@ export function StartScreen({
           </div>
         )}
       </div>
+
+      {helpOpen && <HelpModal onClose={() => setHelpOpen(false)} />}
+      {settingsOpen && (
+        <SettingsModal onClose={() => setSettingsOpen(false)} onMetaReset={onMetaReset} />
+      )}
     </div>
   );
 }
